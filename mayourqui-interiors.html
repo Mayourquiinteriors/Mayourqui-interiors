@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mayourqui Interiors — Where Architecture Meets Art</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Work+Sans:wght@300;400;500;600&display=swap');
+
+  :root{
+    --linen:#F2ECE1;
+    --linen-deep:#E7DECD;
+    --ink:#24211D;
+    --ink-soft:#4A443B;
+    --taupe:#6B6255;
+    --clay:#9C6B4E;
+    --clay-deep:#7E533A;
+    --hairline:#D9D0BD;
+    --max:1160px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  body{
+    margin:0; background:var(--linen); color:var(--ink);
+    font-family:'Work Sans', sans-serif; font-weight:400;
+    font-size:16px; line-height:1.7; -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.serif{ font-family:'Newsreader', serif; font-weight:500; margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--clay-deep); outline-offset:3px; }
+
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 48px; }
+  @media (max-width:640px){ .wrap{ padding:0 24px; } }
+
+  /* NAV */
+  header.nav{
+    position:fixed; top:0; left:0; right:0; z-index:60;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 48px; gap:24px;
+  }
+  @media (max-width:640px){ header.nav{ padding:20px 24px; } }
+  .wordmark{ display:flex; align-items:center; }
+  .wordmark img{
+    height:44px; width:auto; display:block;
+    filter:brightness(0) invert(1);
+    transition:filter 0.25s ease;
+  }
+  header.nav.scrolled .wordmark img{ filter:none; }
+  @media (max-width:640px){ .wordmark img{ height:34px; } }
+
+  .nav-right{ display:flex; align-items:center; gap:28px; }
+
+  nav.links{ display:flex; gap:36px; font-size:0.9rem; color:var(--linen); }
+  header.nav.scrolled nav.links{ color:var(--ink-soft); }
+  nav.links a{ opacity:0.9; transition:opacity 0.2s ease; }
+  nav.links a:hover{ opacity:1; color:var(--clay); }
+
+  .lang-switch{
+    display:flex; align-items:center; gap:6px; font-size:0.82rem;
+    color:var(--linen); border:1px solid rgba(242,236,225,0.5); border-radius:20px; padding:4px 5px;
+  }
+  header.nav.scrolled .lang-switch{ color:var(--ink-soft); border-color:var(--hairline); }
+  .lang-switch button{
+    background:none; border:none; color:inherit; cursor:pointer; font-family:'Work Sans',sans-serif;
+    padding:4px 10px; border-radius:16px; font-size:0.82rem; letter-spacing:0.03em;
+  }
+  .lang-switch button.active{ background:var(--linen); color:var(--ink); }
+  header.nav.scrolled .lang-switch button.active{ background:var(--ink); color:var(--linen); }
+
+  .nav-toggle{ display:none; background:none; border:1px solid currentColor; color:inherit; border-radius:1px; width:38px; height:32px; cursor:pointer; }
+  .nav-toggle span{ display:block; width:16px; height:1px; background:currentColor; margin:4px auto; }
+  @media (max-width:760px){
+    nav.links{ display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:var(--ink); flex-direction:column; align-items:flex-start; justify-content:center; gap:0; padding:0 40px; color:var(--linen); }
+    nav.links.open{ display:flex; }
+    nav.links a{ padding:18px 0; font-size:1.4rem; font-family:'Newsreader',serif; border-bottom:1px solid rgba(242,236,225,0.15); width:100%; }
+    .nav-toggle{ display:block; position:relative; z-index:70; }
+  }
+
+  /* HERO */
+  .hero{
+    position:relative; height:100vh; min-height:560px;
+    background:
+      linear-gradient(180deg, rgba(36,33,29,0.05) 0%, rgba(36,33,29,0.65) 100%),
+      linear-gradient(135deg, #D9CBB4 0%, #B08862 45%, #6B4A36 85%);
+    display:flex; align-items:flex-end;
+    opacity:0; transform:translateY(14px);
+    animation:heroIn 1100ms ease-out 150ms forwards;
+  }
+  @keyframes heroIn{ to{ opacity:1; transform:translateY(0); } }
+
+  .hero-inner{ padding:0 48px 72px; max-width:var(--max); margin:0 auto; width:100%; }
+  @media (max-width:640px){ .hero-inner{ padding:0 24px 52px; } }
+  .hero-eyebrow{ color:var(--linen); font-size:0.85rem; letter-spacing:0.06em; opacity:0.85; margin-bottom:22px; }
+  .hero h1{ color:var(--linen); font-style:italic; font-weight:400; font-size:clamp(2.4rem,6vw,5rem); line-height:1.08; max-width:14ch; }
+
+  /* IMAGE BREAKS */
+  .image-break{ height:64vh; min-height:380px; }
+  .break-1{ background:linear-gradient(150deg,#EADFC8,#B08862 60%,#4A3626); }
+  .break-2{ background:linear-gradient(160deg,#4A443B,#24211D 70%); }
+
+  section.block{ padding:120px 0; }
+  @media (max-width:760px){ section.block{ padding:76px 0; } }
+
+  /* ABOUT */
+  .about-grid{ display:grid; grid-template-columns:1.3fr 0.9fr; gap:72px; align-items:start; }
+  @media (max-width:860px){ .about-grid{ grid-template-columns:1fr; gap:44px; } }
+  .about-eyebrow{ font-size:0.85rem; color:var(--clay-deep); letter-spacing:0.04em; margin-bottom:28px; }
+  .about-grid p.lead{ font-size:1.15rem; color:var(--ink-soft); max-width:58ch; }
+  .about-grid p.lead + p.lead{ margin-top:22px; }
+
+  .founder-card{ border-top:1px solid var(--hairline); padding-top:28px; }
+  .founder-photo{
+    aspect-ratio:3/4; border-radius:1px; margin-bottom:22px;
+    background:linear-gradient(160deg,#E7DECD,#9C6B4E 70%,#4A3626);
+    overflow:hidden;
+  }
+  .founder-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .founder-name{ font-size:1.3rem; }
+  .founder-role{ color:var(--taupe); font-size:0.95rem; margin-top:6px; }
+  .founder-role em{ font-style:italic; color:var(--clay-deep); display:block; margin-top:2px; }
+
+  .studio-section{ background:var(--linen-deep); border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline); }
+  .studio-grid-reverse{ grid-template-columns:0.9fr 1.3fr; }
+  @media (max-width:860px){ .studio-grid-reverse{ grid-template-columns:1fr; } }
+  .studio-grid-reverse .studio-photo{ order:1; }
+  .studio-grid-reverse > div:last-child{ order:2; }
+  @media (max-width:860px){ .studio-grid-reverse .studio-photo{ order:0; } .studio-grid-reverse > div:last-child{ order:1; } }
+  .studio-photo-inner{
+    aspect-ratio:4/3; border-radius:1px; overflow:hidden;
+    background:linear-gradient(155deg,#EADFC8,#B08862 55%,#5B4636);
+  }
+  .studio-photo-inner img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* STORY (About narrative, modeled after reference layout) */
+  .story-head{ text-align:center; margin-bottom:44px; }
+  .story-name{ font-size:clamp(2.4rem,5vw,4rem); letter-spacing:0.01em; }
+  .story-role{ color:var(--clay-deep); font-size:1rem; letter-spacing:0.04em; margin-top:14px; }
+  .story-head h2{ font-size:clamp(1.6rem,2.6vw,2.1rem); margin-top:6px; }
+  .story-head .about-eyebrow{ text-align:center; }
+
+  .story-copy{ max-width:720px; margin:0 auto; }
+  .story-copy p.lead{ font-size:1.08rem; color:var(--ink-soft); max-width:none; text-align:left; }
+  .story-copy p.lead + p.lead{ margin-top:22px; }
+
+  .story-images{
+    display:grid; grid-template-columns:1fr 1fr; gap:28px;
+    max-width:960px; margin:56px auto 0;
+  }
+  @media (max-width:640px){ .story-images{ grid-template-columns:1fr; } }
+  .story-img{ aspect-ratio:4/5; border-radius:1px; overflow:hidden; }
+  .story-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* FOUNDER PORTRAIT with corner caption */
+  .founder-portrait{
+    position:relative; max-width:620px; margin:0 auto;
+    aspect-ratio:3/4; border-radius:1px; overflow:hidden;
+  }
+  .founder-portrait img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .founder-caption{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:28px 30px;
+    background:linear-gradient(0deg, rgba(20,17,13,0.72) 0%, rgba(20,17,13,0.0) 100%);
+    color:var(--linen);
+  }
+  .founder-caption-name{ font-size:1.35rem; line-height:1.2; }
+  .founder-caption-role{ font-size:0.92rem; margin-top:8px; opacity:0.92; }
+  .founder-caption-cred{ font-size:0.85rem; font-style:italic; margin-top:3px; color:#E3C9A8; }
+
+  .studio-standalone-img{ max-width:960px; margin:0 auto; aspect-ratio:16/9; }
+  @media (max-width:640px){ .studio-standalone-img{ aspect-ratio:4/3; } }
+
+  /* PROJECTS */
+  .project-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:32px; }
+  @media (max-width:860px){ .project-grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:560px){ .project-grid{ grid-template-columns:1fr; } }
+  .proj{ display:flex; flex-direction:column; }
+  .proj-frame{ aspect-ratio:4/5; border-radius:1px; margin-bottom:18px; }
+  .proj-a .proj-frame{ background:linear-gradient(150deg,#EADFC8,#B08862 60%,#5B4636); }
+  .proj-b .proj-frame{ background:linear-gradient(160deg,#D9CBB4,#7E533A); }
+  .proj-c .proj-frame{ background:linear-gradient(140deg,#E7DECD,#9C6B4E 70%,#3A2A1E); }
+  .proj-d .proj-frame{ background:linear-gradient(155deg,#C9B896,#4A3626); }
+  .proj-a{ grid-column:span 3; } .proj-b{ grid-column:span 3; }
+  .proj-c{ grid-column:span 3; } .proj-d{ grid-column:span 3; }
+  @media (max-width:860px){ .proj-a,.proj-b,.proj-c,.proj-d{ grid-column:span 1; } }
+  .proj h3{ font-size:1.15rem; margin-bottom:4px; }
+  .proj-meta{ color:var(--taupe); font-size:0.9rem; margin:0; }
+
+  /* SERVICES */
+  .section-head{ margin-bottom:60px; max-width:52ch; }
+  .section-head .about-eyebrow{ margin-bottom:20px; }
+  .section-head h2{ font-size:clamp(1.9rem,3.2vw,2.6rem); }
+
+  .service-row{
+    display:grid; grid-template-columns:110px 1fr; gap:36px;
+    padding:38px 0; border-top:1px solid var(--hairline);
+    align-items:baseline;
+  }
+  .service-row:last-child{ border-bottom:1px solid var(--hairline); }
+  @media (max-width:640px){ .service-row{ grid-template-columns:60px 1fr; gap:20px; } }
+  .service-num{ font-family:'Newsreader', serif; font-style:italic; font-size:clamp(1.6rem,2.6vw,2.2rem); color:var(--clay); }
+  .service-title{ font-size:1.25rem; margin-bottom:10px; }
+  .service-desc{ color:var(--ink-soft); max-width:62ch; font-size:1rem; }
+
+  /* CLOSING / CONTACT */
+  .contact{ background:var(--ink); color:var(--linen); }
+  .contact .wrap{ display:flex; flex-direction:column; align-items:flex-start; gap:40px; padding:130px 48px; }
+  @media (max-width:640px){ .contact .wrap{ padding:80px 24px; } }
+  .contact blockquote{
+    font-family:'Newsreader', serif; font-style:italic; font-weight:400;
+    font-size:clamp(1.8rem,4vw,3rem); max-width:16ch; line-height:1.25; margin:0;
+  }
+  .contact-info{ display:flex; flex-direction:column; gap:12px; font-size:1.02rem; }
+  .contact-info a:hover{ color:var(--clay); }
+  .contact-info .muted{ color:#B7AF9E; }
+
+  footer{ background:var(--ink); color:#8B8272; padding:26px 0; border-top:1px solid rgba(242,236,225,0.12); }
+  footer .wrap{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; font-size:0.82rem; }
+  .footer-brand{ display:flex; align-items:center; gap:10px; }
+  .footer-brand img{ height:22px; width:auto; filter:brightness(0) invert(1); opacity:0.85; }
+</style>
+</head>
+<body>
+
+<header class="nav" id="siteNav">
+  <div class="wordmark"><img src="images/logo.png" alt="Mayourqui Interiors"></div>
+  <div class="nav-right">
+    <nav class="links" id="navLinks">
+      <a href="#founder" data-tr="Hakkımda" data-en="About">Hakkımda</a>
+      <a href="#projects" data-tr="Projeler" data-en="Projects">Projeler</a>
+      <a href="#services" data-tr="Hizmetler" data-en="Services">Hizmetler</a>
+      <a href="#contact" data-tr="İletişim" data-en="Contact">İletişim</a>
+    </nav>
+    <div class="lang-switch">
+      <button type="button" id="btnTR" class="active" onclick="setLang('tr')">TR</button>
+      <button type="button" id="btnEN" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menüyü aç/kapat" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Mayourqui Interiors — Türkiye &amp; International</p>
+    <h1>Where Architecture Meets Art.</h1>
+  </div>
+</section>
+
+<div class="image-break break-1" role="img" aria-label="Görsel yer tutucu"></div>
+
+<section class="block story" id="founder">
+  <div class="wrap">
+    <div class="founder-portrait">
+      <img src="images/ferdaous-esen.png" alt="Ferdaous Oulad Tohami Esen, Founder & Creative Director">
+      <div class="founder-caption">
+        <div class="founder-caption-name serif">Ferdaous Oulad Tohami Esen</div>
+        <div class="founder-caption-role" data-tr="Kurucu &amp; Yaratıcı Direktör" data-en="Founder &amp; Creative Director">Kurucu &amp; Yaratıcı Direktör</div>
+        <div class="founder-caption-cred" data-tr="İnşaat Mühendisi &amp; İç Mimar" data-en="Civil Engineer &amp; Interior Designer">İnşaat Mühendisi &amp; İç Mimar</div>
+      </div>
+    </div>
+
+    <div class="story-head" style="margin-top:64px;">
+      <p class="about-eyebrow" data-tr="Hakkımda" data-en="About">Hakkımda</p>
+    </div>
+    <div class="story-copy">
+      <p class="lead"
+         data-tr="Ferdaous Oulad Tohami Esen, inşaat mühendisliği geçmişini iç mimarlık pratiğine taşıyan Mayourqui Interiors'ın Kurucusu ve Yaratıcı Direktörü'dür. Yaklaşımı, teknik bilgiyi güçlü bir tasarım duyarlılığıyla birleştirir; mimari bütünlük, malzeme, oran ve detaya özel bir önem verir."
+         data-en="Ferdaous Oulad Tohami Esen is the Founder and Creative Director of Mayourqui Interiors, bringing a background in civil engineering to her practice in interior design. Her approach combines technical understanding with a strong design sensibility, with particular attention to architectural coherence, materiality, proportion and detail.">Ferdaous Oulad Tohami Esen, inşaat mühendisliği geçmişini iç mimarlık pratiğine taşıyan Mayourqui Interiors'ın Kurucusu ve Yaratıcı Direktörü'dür. Yaklaşımı, teknik bilgiyi güçlü bir tasarım duyarlılığıyla birleştirir; mimari bütünlük, malzeme, oran ve detaya özel bir önem verir.</p>
+      <p class="lead"
+         data-tr="Konut, hospitality ve seçkin ticari projeler üzerinde çalışan Esen, her projeye kendi bağlamı ve kullanım biçimi üzerinden yaklaşarak, kendine özgü bir kimliği ve kalıcı bir niteliği olan iç mekânlar geliştirir. Çalışmalarında tasarım sürecini bir bütün olarak ele alır; konsept ve mekânsal planlamadan malzeme, mobilya ve uygulama koordinasyonuna kadar."
+         data-en="Working across residential, hospitality and selected commercial projects, Esen approaches each commission through its individual context and way of use, developing interiors with a distinct identity and a lasting quality. Her work considers the design process as a whole, from concept and spatial planning to materials, furniture and implementation coordination.">Konut, hospitality ve seçkin ticari projeler üzerinde çalışan Esen, her projeye kendi bağlamı ve kullanım biçimi üzerinden yaklaşarak, kendine özgü bir kimliği ve kalıcı bir niteliği olan iç mekânlar geliştirir. Çalışmalarında tasarım sürecini bir bütün olarak ele alır; konsept ve mekânsal planlamadan malzeme, mobilya ve uygulama koordinasyonuna kadar.</p>
+      <p class="lead"
+         data-tr="Mayourqui Interiors aracılığıyla Türkiye ve uluslararası ölçekte projeler geliştirmeye devam ediyor; farklı bağlamlarda mimari ile iç mekân arasındaki ilişkiyi keşfediyor."
+         data-en="Through Mayourqui Interiors, she continues to develop projects in Türkiye and internationally, exploring the relationship between architecture and interior space across different contexts.">Mayourqui Interiors aracılığıyla Türkiye ve uluslararası ölçekte projeler geliştirmeye devam ediyor; farklı bağlamlarda mimari ile iç mekân arasındaki ilişkiyi keşfediyor.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block studio-section" id="studio">
+  <div class="wrap">
+    <div class="story-img studio-standalone-img">
+      <img src="images/studio-interior.jpg" alt="Mayourqui Interiors — proje görseli">
+    </div>
+    <div class="story-head" style="margin-top:56px;">
+      <p class="about-eyebrow" data-tr="Stüdyo" data-en="Studio">Stüdyo</p>
+      <h2 class="serif">Mayourqui Interiors</h2>
+    </div>
+    <div class="story-copy">
+      <p class="lead"
+         data-tr="Mayourqui Interiors, Ferdaous Esen tarafından kurulan, mimari düşünce ile iç mekân tasarımını bir araya getiren bağımsız bir tasarım stüdyosudur. İnşaat mühendisliği altyapısını güçlü ve özgün bir tasarım yaklaşımıyla birleştiren stüdyo; zamansız, karakterli ve bulunduğu yere ait hissettiren mekânlar yaratmaya odaklanır."
+         data-en="Mayourqui Interiors is an independent design studio founded by Ferdaous Esen, bringing together architectural thinking and interior design. Combining a strong foundation in civil engineering with a distinctive design approach, the studio focuses on creating spaces that feel timeless, characterful, and truly belonging to their place.">Mayourqui Interiors, Ferdaous Esen tarafından kurulan, mimari düşünce ile iç mekân tasarımını bir araya getiren bağımsız bir tasarım stüdyosudur. İnşaat mühendisliği altyapısını güçlü ve özgün bir tasarım yaklaşımıyla birleştiren stüdyo; zamansız, karakterli ve bulunduğu yere ait hissettiren mekânlar yaratmaya odaklanır.</p>
+      <p class="lead"
+         data-tr="Türkiye ve uluslararası ölçekte konut, villa, butik hospitality ve seçkin ticari mekân projeleri üzerinde çalışan Mayourqui Interiors; konsept geliştirmeden malzeme seçimine, görselleştirmeden uygulama koordinasyonuna kadar projeleri bütüncül bir yaklaşımla ele alır. Her proje, müşterinin yaşam biçimi, mekânın mimarisi ve kendine özgü atmosferinden yola çıkarak geliştirilir."
+         data-en="Working on residential, villa, boutique hospitality, and select commercial projects across Türkiye and internationally, Mayourqui Interiors approaches every project holistically — from concept development to material selection, and from visualization to implementation coordination. Each project is developed around the client's way of living, the architecture of the space, and its own distinct atmosphere.">Türkiye ve uluslararası ölçekte konut, villa, butik hospitality ve seçkin ticari mekân projeleri üzerinde çalışan Mayourqui Interiors; konsept geliştirmeden malzeme seçimine, görselleştirmeden uygulama koordinasyonuna kadar projeleri bütüncül bir yaklaşımla ele alır. Her proje, müşterinin yaşam biçimi, mekânın mimarisi ve kendine özgü atmosferinden yola çıkarak geliştirilir.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="about-eyebrow" data-tr="Projeler" data-en="Projects">Projeler</p>
+      <h2 data-tr="Türkiye ve uluslararası ölçekte seçilmiş projeler." data-en="Selected projects, in Türkiye and internationally.">Türkiye ve uluslararası ölçekte seçilmiş projeler.</h2>
+    </div>
+    <div class="project-grid">
+      <article class="proj proj-a">
+        <div class="proj-frame"></div>
+        <h3 class="serif" data-tr="Konut Projesi" data-en="Residential Project">Konut Projesi</h3>
+        <p class="proj-meta" data-tr="Türkiye" data-en="Türkiye">Türkiye</p>
+      </article>
+      <article class="proj proj-b">
+        <div class="proj-frame"></div>
+        <h3 class="serif" data-tr="Villa Projesi" data-en="Villa Project">Villa Projesi</h3>
+        <p class="proj-meta" data-tr="Türkiye" data-en="Türkiye">Türkiye</p>
+      </article>
+      <article class="proj proj-c">
+        <div class="proj-frame"></div>
+        <h3 class="serif" data-tr="Butik Hospitality" data-en="Boutique Hospitality">Butik Hospitality</h3>
+        <p class="proj-meta" data-tr="Uluslararası" data-en="International">Uluslararası</p>
+      </article>
+      <article class="proj proj-d">
+        <div class="proj-frame"></div>
+        <h3 class="serif" data-tr="Ticari Mekân" data-en="Commercial Project">Ticari Mekân</h3>
+        <p class="proj-meta" data-tr="Türkiye" data-en="Türkiye">Türkiye</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="services" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="about-eyebrow" data-tr="Hizmetler" data-en="Services">Hizmetler</p>
+      <h2 data-tr="Konseptten uygulamaya, bütüncül bir yaklaşım." data-en="A holistic practice, from concept to completion.">Konseptten uygulamaya, bütüncül bir yaklaşım.</h2>
+    </div>
+
+    <div class="service-row">
+      <div class="service-num">01</div>
+      <div>
+        <div class="service-title serif">Interior Architecture &amp; Design</div>
+        <p class="service-desc" data-tr="Konut, villa, hospitality ve ticari mekânlar için özgün ve bütüncül iç mekân tasarımı." data-en="Original, holistic interior design for residences, villas, hospitality, and commercial spaces.">Konut, villa, hospitality ve ticari mekânlar için özgün ve bütüncül iç mekân tasarımı.</p>
+      </div>
+    </div>
+    <div class="service-row">
+      <div class="service-num">02</div>
+      <div>
+        <div class="service-title serif">Concept &amp; Creative Direction</div>
+        <p class="service-desc" data-tr="Projenin konseptinden renk, malzeme, mobilya ve aydınlatma diline kadar bütünsel yaratıcı yönünün oluşturulması." data-en="Shaping the full creative direction of a project — from concept to color, material, furniture, and lighting language.">Projenin konseptinden renk, malzeme, mobilya ve aydınlatma diline kadar bütünsel yaratıcı yönünün oluşturulması.</p>
+      </div>
+    </div>
+    <div class="service-row">
+      <div class="service-num">03</div>
+      <div>
+        <div class="service-title serif">Architectural &amp; Spatial Design</div>
+        <p class="service-desc" data-tr="Mekânsal planlama, fonksiyon çözümleri ve mimari tasarım geliştirme." data-en="Spatial planning, functional solutions, and architectural design development.">Mekânsal planlama, fonksiyon çözümleri ve mimari tasarım geliştirme.</p>
+      </div>
+    </div>
+    <div class="service-row">
+      <div class="service-num">04</div>
+      <div>
+        <div class="service-title serif">3D Visualization</div>
+        <p class="service-desc" data-tr="Tasarlanan mekânların uygulama öncesinde yüksek kaliteli ve gerçekçi görsellerle deneyimlenmesi." data-en="Experiencing designed spaces through high-quality, realistic visuals before implementation.">Tasarlanan mekânların uygulama öncesinde yüksek kaliteli ve gerçekçi görsellerle deneyimlenmesi.</p>
+      </div>
+    </div>
+    <div class="service-row">
+      <div class="service-num">05</div>
+      <div>
+        <div class="service-title serif">FF&amp;E &amp; Styling</div>
+        <p class="service-desc" data-tr="Mobilya, aydınlatma, sanat, tekstil ve aksesuar seçimleriyle mekânın son tasarım katmanlarının oluşturulması." data-en="Shaping the final design layers of a space through furniture, lighting, art, textiles, and accessories.">Mobilya, aydınlatma, sanat, tekstil ve aksesuar seçimleriyle mekânın son tasarım katmanlarının oluşturulması.</p>
+      </div>
+    </div>
+    <div class="service-row">
+      <div class="service-num">06</div>
+      <div>
+        <div class="service-title serif">Project Coordination &amp; Implementation</div>
+        <p class="service-desc" data-tr="Tasarımın sahada doğru şekilde hayata geçirilmesi için uygulama koordinasyonu ve tasarım takibi." data-en="On-site implementation coordination and design oversight to ensure the design is executed correctly.">Tasarımın sahada doğru şekilde hayata geçirilmesi için uygulama koordinasyonu ve tasarım takibi.</p>
+      </div>
+    </div>
+    <div class="service-row">
+      <div class="service-num">07</div>
+      <div>
+        <div class="service-title serif">International Design Services</div>
+        <p class="service-desc" data-tr="Türkiye ve uluslararası projeler için uzaktan veya yerinde tasarım hizmetleri." data-en="Remote or on-site design services for projects in Türkiye and internationally.">Türkiye ve uluslararası projeler için uzaktan veya yerinde tasarım hizmetleri.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="image-break break-2" role="img" aria-label="Görsel yer tutucu"></div>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <blockquote>Where Architecture Meets Art.</blockquote>
+    <div class="contact-info">
+      <span>Mayourqui Interiors</span>
+      <span class="muted" data-tr="Türkiye ve uluslararası ölçekte projeler için hizmet veriyoruz." data-en="Available for projects in Türkiye &amp; internationally.">Türkiye ve uluslararası ölçekte projeler için hizmet veriyoruz.</span>
+      <a href="https://instagram.com/mayourquiinteriors" target="_blank" rel="noopener">Instagram — @mayourquiinteriors</a>
+      <span class="muted">mayourquiinteriors.com</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Mayourqui Interiors">
+      <span>© 2026 Mayourqui Interiors</span>
+    </div>
+    <span data-tr="Görseller yer tutucudur — kendi proje fotoğraflarınızla değiştirin" data-en="Images are placeholders — replace with your own project photography">Görseller yer tutucudur — kendi proje fotoğraflarınızla değiştirin</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('siteNav');
+  const onScroll = () => {
+    if (window.scrollY > window.innerHeight * 0.7) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
+  }));
+
+  function setLang(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-tr]').forEach(el => {
+      el.innerHTML = lang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-tr');
+    });
+    document.getElementById('btnTR').classList.toggle('active', lang === 'tr');
+    document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+  }
+</script>
+
+</body>
+</html>
