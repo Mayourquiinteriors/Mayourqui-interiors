@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mayourqui Interiors — Where Architecture Meets Art</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Work+Sans:wght@300;400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Work+Sans:wght@300;400;500;600&family=Allura&family=Mrs+Saint+Delafield&display=swap');
 
   :root{
+    --nav-h:84px;
     --linen:#F2ECE1;
     --linen-deep:#E7DECD;
     --ink:#24211D;
@@ -20,7 +21,7 @@
   }
 
   *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+  html{ scroll-behavior:smooth; scroll-padding-top:var(--nav-h); }
   @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
@@ -41,74 +42,84 @@
 
   /* NAV */
   header.nav{
+    background:var(--linen); border-bottom:1px solid var(--hairline);
     position:fixed; top:0; left:0; right:0; z-index:60;
     display:flex; align-items:center; justify-content:space-between;
-    padding:28px 48px; gap:24px;
+    height:var(--nav-h); padding:0 48px; gap:24px;
   }
-  @media (max-width:640px){ header.nav{ padding:20px 24px; } }
+  @media (max-width:640px){ :root{ --nav-h:64px; } header.nav{ padding:0 24px; } }
   .wordmark{ display:flex; align-items:center; }
   .wordmark img{
     height:44px; width:auto; display:block;
-    filter:brightness(0) invert(1);
-    transition:filter 0.25s ease;
   }
-  header.nav.scrolled .wordmark img{ filter:none; }
   @media (max-width:640px){ .wordmark img{ height:34px; } }
 
   .nav-right{ display:flex; align-items:center; gap:28px; }
 
-  nav.links{ display:flex; gap:36px; font-size:0.9rem; color:var(--linen); }
-  header.nav.scrolled nav.links{ color:var(--ink-soft); }
+  nav.links{ display:flex; gap:36px; font-size:0.9rem; color:var(--ink-soft); }
   nav.links a{ opacity:0.9; transition:opacity 0.2s ease; }
   nav.links a:hover{ opacity:1; color:var(--clay); }
 
   .lang-switch{
     display:flex; align-items:center; gap:6px; font-size:0.82rem;
-    color:var(--linen); border:1px solid rgba(242,236,225,0.5); border-radius:20px; padding:4px 5px;
+    color:var(--ink-soft); border:1px solid var(--hairline); border-radius:20px; padding:4px 5px;
   }
-  header.nav.scrolled .lang-switch{ color:var(--ink-soft); border-color:var(--hairline); }
   .lang-switch button{
     background:none; border:none; color:inherit; cursor:pointer; font-family:'Work Sans',sans-serif;
     padding:4px 10px; border-radius:16px; font-size:0.82rem; letter-spacing:0.03em;
   }
-  .lang-switch button.active{ background:var(--linen); color:var(--ink); }
-  header.nav.scrolled .lang-switch button.active{ background:var(--ink); color:var(--linen); }
+  .lang-switch button.active{ background:var(--ink); color:var(--linen); }
 
   .nav-toggle{ display:none; background:none; border:1px solid currentColor; color:inherit; border-radius:1px; width:38px; height:32px; cursor:pointer; }
   .nav-toggle span{ display:block; width:16px; height:1px; background:currentColor; margin:4px auto; }
   @media (max-width:760px){
     nav.links{ display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:var(--ink); flex-direction:column; align-items:flex-start; justify-content:center; gap:0; padding:0 40px; color:var(--linen); }
     nav.links.open{ display:flex; }
+    nav.links a{ color:var(--linen); }
     nav.links a{ padding:18px 0; font-size:1.4rem; font-family:'Newsreader',serif; border-bottom:1px solid rgba(242,236,225,0.15); width:100%; }
     .nav-toggle{ display:block; position:relative; z-index:70; }
   }
 
-  /* HERO */
+  /* HERO — split: text left, photo right */
   .hero{
-    position:relative; height:100vh; min-height:560px;
-    background:
-      linear-gradient(180deg, rgba(36,33,29,0.05) 0%, rgba(36,33,29,0.65) 100%),
-      linear-gradient(135deg, #D9CBB4 0%, #B08862 45%, #6B4A36 85%);
-    display:flex; align-items:flex-end;
-    opacity:0; transform:translateY(14px);
-    animation:heroIn 1100ms ease-out 150ms forwards;
+    display:grid; grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);
+    min-height:100vh; min-height:100svh;
+    padding-top:var(--nav-h);
+    background:var(--linen);
+    opacity:0; animation:heroIn 900ms ease-out 100ms forwards;
   }
-  @keyframes heroIn{ to{ opacity:1; transform:translateY(0); } }
+  @keyframes heroIn{ to{ opacity:1; } }
 
-  .hero-inner{ padding:0 48px 72px; max-width:var(--max); margin:0 auto; width:100%; }
-  @media (max-width:640px){ .hero-inner{ padding:0 24px 52px; } }
-  .hero-eyebrow{ color:var(--linen); font-size:0.85rem; letter-spacing:0.06em; opacity:0.85; margin-bottom:22px; }
-  .hero h1{ color:var(--linen); font-style:italic; font-weight:400; font-size:clamp(2.4rem,6vw,5rem); line-height:1.08; max-width:14ch; }
+  .hero-copy{
+    display:flex; align-items:center;
+    padding:48px 40px 48px max(28px, calc((100vw - var(--max)) / 2 + 48px));
+  }
+  .about-text{ max-width:560px; }
+  .about-name{ font-size:clamp(2.2rem,3.8vw,3.4rem); line-height:1.08; letter-spacing:-0.01em; }
+  .about-script{ font-family:'Allura','Brush Script MT',cursive; font-size:clamp(1.9rem,2.8vw,2.5rem); line-height:1.1; color:var(--clay); margin:14px 0 0; }
+  .about-role{ color:var(--taupe); font-size:0.95rem; letter-spacing:0.03em; margin:10px 0 0; padding-top:14px; border-top:1px solid var(--hairline); display:inline-block; }
+  .about-bio{ margin-top:30px; }
+  .about-bio p.lead{ font-size:1.02rem; color:var(--ink-soft); max-width:none; text-align:left; }
+  .about-bio p.lead + p.lead{ margin-top:18px; }
+  .studio-tagline{ text-align:center; font-style:italic; font-weight:400; font-size:clamp(2rem,4.6vw,3.6rem); line-height:1.1; margin:0 0 44px; }
+
+  .hero-photo{ position:relative; overflow:hidden; min-height:420px; background:var(--linen-deep); }
+  .hero-photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 22%; display:block; }
+
+  @media (max-width:900px){
+    .about-name{ font-size:clamp(1.8rem,4.6vw,2.6rem); }
+    .about-bio p.lead{ font-size:0.96rem; }
+  }
+  @media (max-width:640px){
+    .hero{ grid-template-columns:1fr; min-height:0; }
+    .hero-photo{ order:-1; min-height:0; aspect-ratio:4/5; }
+    .hero-copy{ padding:32px 24px 36px; }
+  }
 
   /* IMAGE BREAKS */
   .image-break{ height:64vh; min-height:380px; }
   .break-1{ background:linear-gradient(150deg,#EADFC8,#B08862 60%,#4A3626); }
   .break-2{ background:linear-gradient(160deg,#4A443B,#24211D 70%); }
-  .logo-showcase{
-    display:flex; align-items:center; justify-content:center;
-    background:var(--linen); height:40vh; min-height:260px;
-  }
-  .logo-showcase img{ width:min(320px, 40%); height:auto; }
 
   section.block{ padding:120px 0; }
   @media (max-width:760px){ section.block{ padding:76px 0; } }
@@ -162,26 +173,29 @@
   .story-img{ aspect-ratio:4/5; border-radius:1px; overflow:hidden; }
   .story-img img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-  /* FOUNDER PORTRAIT with corner caption */
-  .founder-portrait{
-    position:relative; max-width:620px; margin:0 auto;
-    aspect-ratio:3/4; border-radius:1px; overflow:hidden;
-  }
-  .founder-portrait img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .founder-caption{
-    position:absolute; left:0; right:0; bottom:0;
-    padding:28px 30px;
-    background:linear-gradient(0deg, rgba(20,17,13,0.72) 0%, rgba(20,17,13,0.0) 100%);
-    color:var(--linen);
-  }
-  .founder-caption-name{ font-size:1.35rem; line-height:1.2; }
-  .founder-caption-role{ font-size:0.92rem; margin-top:8px; opacity:0.92; }
-  .founder-caption-cred{ font-size:0.85rem; font-style:italic; margin-top:3px; color:#E3C9A8; }
-
   .studio-standalone-img{ max-width:960px; margin:0 auto; aspect-ratio:16/9; }
   @media (max-width:640px){ .studio-standalone-img{ aspect-ratio:4/3; } }
 
   /* PROJECTS */
+  .projects-section{
+    position:relative; color:var(--linen);
+    background:
+      radial-gradient(900px 420px at 12% 0%, rgba(190,146,102,0.38), transparent 62%),
+      radial-gradient(800px 460px at 100% 100%, rgba(156,107,78,0.30), transparent 60%),
+      linear-gradient(160deg, #2A211B 0%, #3B2C22 55%, #241C17 100%);
+    border-top:1px solid rgba(201,160,110,0.45); border-bottom:1px solid rgba(201,160,110,0.45);
+  }
+  .projects-section .about-eyebrow{ color:#D9B890; }
+  .projects-section .section-head{ max-width:none; }
+  .projects-section .section-head h2{ color:var(--linen); max-width:22ch; line-height:1.18; }
+  .signature{
+    font-family:'Mrs Saint Delafield','Allura','Brush Script MT',cursive;
+    font-size:clamp(2.4rem,4.4vw,3.6rem); line-height:1; color:#D9B890;
+    margin:10px 0 0; transform:rotate(-3deg); transform-origin:left center; display:inline-block;
+  }
+  .projects-section .proj h3{ color:var(--linen); }
+  .projects-section .proj-meta{ color:#C5B79F; }
+  .projects-section .proj-frame{ box-shadow:0 18px 40px rgba(0,0,0,0.35); }
   .project-grid{ display:grid; grid-template-columns:repeat(6,1fr); gap:32px; }
   @media (max-width:860px){ .project-grid{ grid-template-columns:1fr 1fr; } }
   @media (max-width:560px){ .project-grid{ grid-template-columns:1fr; } }
@@ -283,32 +297,13 @@
   </div>
 </header>
 
-<section class="hero">
-  <div class="hero-inner">
-    <p class="hero-eyebrow">Mayourqui Interiors — Türkiye &amp; International</p>
-    <h1>Where Architecture Meets Art.</h1>
-  </div>
-</section>
-
-<div class="image-break break-1 logo-showcase">
-  <img src="images/logo.png" alt="Mayourqui Interiors">
-</div>
-
-<section class="block story" id="founder">
-  <div class="wrap">
-    <div class="founder-portrait">
-      <img src="images/ferdaous-esen.png" alt="Ferdaous Oulad Tohami Esen, Founder & Creative Director">
-      <div class="founder-caption">
-        <div class="founder-caption-name serif">Ferdaous Oulad Tohami Esen</div>
-        <div class="founder-caption-role" data-tr="Kurucu &amp; Yaratıcı Direktör" data-en="Founder &amp; Creative Director">Kurucu &amp; Yaratıcı Direktör</div>
-        <div class="founder-caption-cred" data-tr="İnşaat Mühendisi &amp; İç Mimar" data-en="Civil Engineer &amp; Interior Designer">İnşaat Mühendisi &amp; İç Mimar</div>
-      </div>
-    </div>
-
-    <div class="story-head" style="margin-top:64px;">
-      <p class="about-eyebrow" data-tr="Hakkımda" data-en="About">Hakkımda</p>
-    </div>
-    <div class="story-copy">
+<section class="hero" id="founder">
+  <div class="hero-copy">
+    <div class="about-text">
+      <h1 class="serif about-name">Ferdaous Oulad Tohami Esen</h1>
+      <p class="about-script" data-tr="Kurucu &amp; Yaratıcı Direktör" data-en="Founder &amp; Creative Director">Kurucu &amp; Yaratıcı Direktör</p>
+      <p class="about-role" data-tr="İnşaat Mühendisi &amp; İç Mimar" data-en="Civil Engineer &amp; Interior Designer">İnşaat Mühendisi &amp; İç Mimar</p>
+      <div class="about-bio">
       <p class="lead"
          data-tr="Ferdaous Oulad Tohami Esen, inşaat mühendisliği geçmişini iç mimarlık pratiğine taşıyan Mayourqui Interiors'ın Kurucusu ve Yaratıcı Direktörü'dür. Yaklaşımı, teknik bilgiyi güçlü bir tasarım duyarlılığıyla birleştirir; mimari bütünlük, malzeme, oran ve detaya özel bir önem verir."
          data-en="Ferdaous Oulad Tohami Esen is the Founder and Creative Director of Mayourqui Interiors, bringing a background in civil engineering to her practice in interior design. Her approach combines technical understanding with a strong design sensibility, with particular attention to architectural coherence, materiality, proportion and detail.">Ferdaous Oulad Tohami Esen, inşaat mühendisliği geçmişini iç mimarlık pratiğine taşıyan Mayourqui Interiors'ın Kurucusu ve Yaratıcı Direktörü'dür. Yaklaşımı, teknik bilgiyi güçlü bir tasarım duyarlılığıyla birleştirir; mimari bütünlük, malzeme, oran ve detaya özel bir önem verir.</p>
@@ -319,11 +314,16 @@
          data-tr="Mayourqui Interiors aracılığıyla Türkiye ve uluslararası ölçekte projeler geliştirmeye devam ediyor; farklı bağlamlarda mimari ile iç mekân arasındaki ilişkiyi keşfediyor."
          data-en="Through Mayourqui Interiors, she continues to develop projects in Türkiye and internationally, exploring the relationship between architecture and interior space across different contexts.">Mayourqui Interiors aracılığıyla Türkiye ve uluslararası ölçekte projeler geliştirmeye devam ediyor; farklı bağlamlarda mimari ile iç mekân arasındaki ilişkiyi keşfediyor.</p>
     </div>
+    </div>
+  </div>
+  <div class="hero-photo">
+    <img src="images/ferdaous-esen.png" alt="Ferdaous Oulad Tohami Esen, Founder &amp; Creative Director">
   </div>
 </section>
 
 <section class="block studio-section" id="studio">
   <div class="wrap">
+    <h2 class="serif studio-tagline">Where Architecture Meets Art.</h2>
     <div class="story-img studio-standalone-img">
       <img src="images/studio-interior.jpg" alt="Mayourqui Interiors — proje görseli">
     </div>
@@ -342,11 +342,12 @@
   </div>
 </section>
 
-<section class="block" id="projects">
+<section class="block projects-section" id="projects">
   <div class="wrap">
     <div class="section-head">
       <p class="about-eyebrow" data-tr="Projeler" data-en="Projects">Projeler</p>
       <h2 data-tr="Türkiye ve uluslararası ölçekte seçilmiş projeler." data-en="Selected projects, in Türkiye and internationally.">Türkiye ve uluslararası ölçekte seçilmiş projeler.</h2>
+      <p class="signature" aria-label="by Ferdaous Esen">by Ferdaous Esen</p>
     </div>
     <div class="project-grid">
       <article class="proj proj-a" onclick="openGallery('cankaya-evi')" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openGallery('cankaya-evi')">
@@ -474,13 +475,6 @@
 </div>
 
 <script>
-  const nav = document.getElementById('siteNav');
-  const onScroll = () => {
-    if (window.scrollY > window.innerHeight * 0.7) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  };
-  window.addEventListener('scroll', onScroll, { passive:true });
-  onScroll();
 
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
